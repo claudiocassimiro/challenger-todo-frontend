@@ -1,9 +1,9 @@
 const nextConfig = {
-  // images: {
-  //   domains: ['localhost', 'res.cloudinary.com', 'meu-menu-digital.vercel.app'],
-  // },
   reactStrictMode: true,
   swcMinify: true,
+  compiler: {
+    styledComponents: true,
+  },
 };
 
 module.exports = nextConfig;
