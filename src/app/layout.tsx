@@ -1,4 +1,5 @@
 import "./globals.css";
+import StyledComponentsRegistry from "./lib/registry";
 
 export const metadata = {
   title: "Todo List",
@@ -12,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true}>
+        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+      </body>
     </html>
   );
 }

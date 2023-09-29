@@ -58,6 +58,7 @@ export default function Login() {
           width="250"
           height="80"
           alt="Logo da TODO list"
+          priority
         />
 
         <Label className={inter.className} htmlFor="email">
