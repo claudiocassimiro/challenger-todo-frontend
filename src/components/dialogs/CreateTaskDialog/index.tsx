@@ -22,13 +22,17 @@ export default function CreateTaskDialog({
     <Dialog.Root open={showDialog}>
       <Dialog.Trigger asChild>
         <AiOutlinePlusCircle
+          style={{ cursor: "pointer" }}
           size={64}
           fill="#7E57C2"
           onClick={() => setShowDialog(true)}
         />
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className={styles.dialogOverlay} />
+        <Dialog.Overlay
+          className={styles.dialogOverlay}
+          onClick={() => setShowDialog(false)}
+        />
         <Dialog.Content className={styles.dialogContent}>
           <div className={styles.containerTitleAndCloseButton}>
             <Dialog.Title
@@ -38,7 +42,12 @@ export default function CreateTaskDialog({
               Criar Tarefa
             </Dialog.Title>
             <Dialog.Close asChild>
-              <AiOutlineClose size={25} color="#000" />
+              <AiOutlineClose
+                style={{ cursor: "pointer" }}
+                size={25}
+                color="#000"
+                onClick={() => setShowDialog(false)}
+              />
             </Dialog.Close>
           </div>
           <CreateTaskForm
