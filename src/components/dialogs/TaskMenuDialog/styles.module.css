@@ -1,4 +1,8 @@
 .dropdownMenuContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
   color: #000;
   min-width: 220px;
   background-color: white;
