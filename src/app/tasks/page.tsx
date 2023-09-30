@@ -81,10 +81,9 @@ export default function Tasks() {
                       <H2 className={inter.className}>{task?.title}</H2>
                       {task?.completion_data ? (
                         <TaskP className={inter.className}>
-                          {`${new Date(task?.completion_data).toLocaleString(
-                            "pt-BR",
-                            { timeZone: "America/Sao_Paulo" }
-                          )}`.replace("GMT-0300 (Brasilia Standard Time)", "")}
+                          {`${new Date(
+                            task?.completion_data
+                          ).toLocaleDateString("pt-BR")}`}
                         </TaskP>
                       ) : null}
                     </div>
