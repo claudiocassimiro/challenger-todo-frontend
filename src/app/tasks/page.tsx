@@ -18,15 +18,15 @@ import {
   ContainerImageAndTaskInfos,
 } from "./tasksStyles";
 
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
+import CreateTaskDialog from "@/components/dialogs/CreateTaskDialog";
 
 const inter = Inter({ subsets: ["latin"] });
 
-type Task = {
+export type Task = {
   id: string;
   title: string;
   description: string;
@@ -80,10 +80,10 @@ export default function Tasks() {
                       <H2 className={inter.className}>{task.title}</H2>
                       {task.completion_data ? (
                         <TaskP className={inter.className}>
-                          {`${new Date(task.completion_data)}`.replace(
-                            "GMT-0300 (Brasilia Standard Time)",
-                            ""
-                          )}
+                          {`${new Date(task.completion_data).toLocaleString(
+                            "pt-BR",
+                            { timeZone: "America/Sao_Paulo" }
+                          )}`.replace("GMT-0300 (Brasilia Standard Time)", "")}
                         </TaskP>
                       ) : null}
                     </div>
@@ -107,7 +107,7 @@ export default function Tasks() {
             </ContainerImageAndTaskInfos>
           )}
         </Div>
-        <AiOutlinePlusCircle size={64} fill="#7E57C2" />
+        <CreateTaskDialog setTasks={setTasks} tasks={tasks} />
       </Section>
     </Main>
   );
