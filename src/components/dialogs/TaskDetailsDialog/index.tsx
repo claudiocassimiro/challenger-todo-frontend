@@ -1,25 +1,17 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { AiOutlineClose } from "react-icons/ai";
-import { MdEditSquare } from "react-icons/md";
+import { AiOutlineClose, AiFillEye } from "react-icons/ai";
 import styles from "./styles.module.css";
 import { Inter } from "next/font/google";
 import { Task } from "@/app/tasks/page";
-import { Dispatch, SetStateAction, useState } from "react";
-import UpdateTaskForm from "@/components/forms/UpdateTaskForm";
+import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-interface UpdateTaskDialogProps {
-  setTasks: Dispatch<SetStateAction<Task[]>>;
-  tasks: Task[];
-  taskToBeEdited: Task;
+interface TaskDetailsDialogProps {
+  task: Task;
 }
 
-export default function UpdateTaskDialog({
-  setTasks,
-  tasks,
-  taskToBeEdited,
-}: UpdateTaskDialogProps) {
+export default function TaskDetailsDialog({ task }: TaskDetailsDialogProps) {
   const [showDialog, setShowDialog] = useState(false);
   return (
     <Dialog.Root open={showDialog}>
@@ -28,11 +20,12 @@ export default function UpdateTaskDialog({
           className={styles.containerOpenDialogButton}
           onClick={() => setShowDialog(true)}
         >
-          Editar tarefa
-          <MdEditSquare
+          Detalhes da tarefa
+          <AiFillEye
             style={{ cursor: "pointer" }}
             size={22}
             fill="#7E57C2"
+            onClick={() => setShowDialog(true)}
           />
         </div>
       </Dialog.Trigger>
@@ -47,7 +40,7 @@ export default function UpdateTaskDialog({
               className={`${styles.dialogTitle}, ${inter.className}`}
               style={{ color: "#000" }}
             >
-              Atualizar Tarefa
+              {task.title}
             </Dialog.Title>
             <Dialog.Close asChild>
               <AiOutlineClose
@@ -58,12 +51,20 @@ export default function UpdateTaskDialog({
               />
             </Dialog.Close>
           </div>
-          <UpdateTaskForm
-            setTasks={setTasks}
-            tasks={tasks}
-            setShowDialog={setShowDialog}
-            taskToBeEdited={taskToBeEdited}
-          />
+          <div className={styles.container}>
+            <p
+              className={styles.informationText}
+            >{`Prioridade: ${task.priority}`}</p>
+            <p
+              className={styles.informationText}
+            >{`Data para conclusão: ${new Date(
+              task.completion_data
+            ).toLocaleDateString("pt-BR")}`}</p>
+          </div>
+          <p className={styles.informationText}>Descrição:</p>
+          <div className={styles.container}>
+            <p className={styles.informationText}>{task.description}</p>
+          </div>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
