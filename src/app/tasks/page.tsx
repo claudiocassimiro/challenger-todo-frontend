@@ -18,7 +18,7 @@ import {
   ContainerImageAndTaskInfos,
 } from "./tasksStyles";
 
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
@@ -34,6 +34,7 @@ export type Task = {
   completion_data: string;
   priority: string;
   creation_data: string;
+  completed: boolean;
 };
 
 export default function Tasks() {
@@ -64,6 +65,37 @@ export default function Tasks() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
+  const updateTaskStatus = async (
+    e: ChangeEvent<HTMLInputElement>,
+    taskId: string
+  ) => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/tasks/update/status`,
+        {
+          id: taskId,
+          completed: e.target.checked,
+        }
+      );
+
+      if (response.status !== 200) {
+        throw new Error();
+      }
+
+      const { data } = response;
+
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...data };
+        }
+
+        return { ...task };
+      });
+
+      setTasks(updatedTasks);
+    } catch {}
+  };
+
   return (
     <Main>
       <Header>
@@ -76,7 +108,11 @@ export default function Tasks() {
               return (
                 <ContainerTask key={task?.id}>
                   <ContainerCompleteCheckBoxAndTaskInfo>
-                    <CheckBox type="checkbox" />
+                    <CheckBox
+                      type="checkbox"
+                      checked={task.completed}
+                      onChange={(e) => updateTaskStatus(e, task.id)}
+                    />
                     <div>
                       <H2 className={inter.className}>{task?.title}</H2>
                       {task?.completion_data ? (
