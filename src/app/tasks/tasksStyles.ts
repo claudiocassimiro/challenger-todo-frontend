@@ -34,12 +34,12 @@ export const Section = styled.section`
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 95%;
   gap: 1rem;
   margin: 0 auto;
   max-height: 50%;
   overflow: auto;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     align-items: center;
     width: 50%;
     max-height: 60%;
@@ -62,11 +62,10 @@ export const ContainerTask = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 7.2rem;
   background-color: #363636;
   border-radius: 0.4rem;
   padding: 0.5rem 1rem;
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     width: 80%;
     padding: 0.5rem 2rem;
   }
