@@ -24,12 +24,17 @@ export default function UpdateTaskDialog({
   return (
     <Dialog.Root open={showDialog}>
       <Dialog.Trigger asChild>
-        <MdEditSquare
-          style={{ cursor: "pointer" }}
-          size={22}
-          fill="#7E57C2"
+        <div
+          className={styles.containerOpenDialogButton}
           onClick={() => setShowDialog(true)}
-        />
+        >
+          Editar tarefa
+          <MdEditSquare
+            style={{ cursor: "pointer" }}
+            size={22}
+            fill="#7E57C2"
+          />
+        </div>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay
