@@ -26,6 +26,16 @@
   outline: none;
 }
 
+.containerOpenDialogButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  color: #000;
+}
+
 .containerTitleAndCloseButton {
   display: flex;
   justify-content: space-between;
