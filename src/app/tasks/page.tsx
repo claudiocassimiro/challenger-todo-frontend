@@ -23,8 +23,7 @@ import axios from "axios";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import CreateTaskDialog from "@/components/dialogs/CreateTaskDialog";
-import UpdateTaskDialog from "@/components/dialogs/UpdateTaskDialog";
-import DeleteTaskDialog from "@/components/dialogs/DeleteTaskDialog";
+import TaskMenuDialog from "@/components/dialogs/TaskMenuDialog";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -91,15 +90,11 @@ export default function Tasks() {
                     </div>
                   </ContainerCompleteCheckBoxAndTaskInfo>
                   <div>
-                    <UpdateTaskDialog
+                    <TaskMenuDialog
                       setTasks={setTasks}
+                      taskId={task.id}
                       tasks={tasks}
                       taskToBeEdited={task}
-                    />
-                    <DeleteTaskDialog
-                      taskId={task.id}
-                      setTasks={setTasks}
-                      tasks={tasks}
                     />
                   </div>
                 </ContainerTask>
