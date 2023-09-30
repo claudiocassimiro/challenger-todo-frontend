@@ -7,6 +7,7 @@
   color: #dc2626;
   background-color: transparent;
   border: none;
+  width: 100%;
 }
 
 .deleteTaskDialogOverlay {
@@ -28,6 +29,17 @@
   height: 12rem;
   background-color: #fff;
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.containerOpenDialogButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
 }
 
 .deleteTaskDialogText {
