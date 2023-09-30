@@ -12,7 +12,7 @@ import {
   Label,
   Span,
   Button,
-} from "./createTaskForm";
+} from "./updateTaskForm";
 import axios from "axios";
 import { Dispatch, SetStateAction, useState } from "react";
 import useAuth from "@/hooks/useAuth";
@@ -27,41 +27,53 @@ type Inputs = {
 
 const inter = Inter({ subsets: ["latin"] });
 
-interface CreateTaskFormProps {
+interface UpdateTaskFormProps {
   setTasks: Dispatch<SetStateAction<Task[]>>;
   tasks: Task[];
   setShowDialog: Dispatch<SetStateAction<boolean>>;
+  taskToBeEdited: Task;
 }
 
-export default function CreateTaskForm({
+export default function UpdateTaskForm({
   setTasks,
   tasks,
   setShowDialog,
-}: CreateTaskFormProps) {
+  taskToBeEdited,
+}: UpdateTaskFormProps) {
   const [errorMessage, setErrorMessage] = useState("");
   const { token } = useAuth();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit, reset } = useForm<Inputs>({
+    defaultValues: {
+      title: taskToBeEdited.title,
+      description: taskToBeEdited.description,
+      priority: taskToBeEdited.priority,
+    },
+  });
 
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     const parsedData = {
       ...formData,
+      id: taskToBeEdited.id,
       priority: formData.priority.toLowerCase(),
     };
 
     try {
-      const response = await axios.post(
+      const response = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL}/tasks`,
         parsedData
       );
 
       const { data } = response;
-      setTasks([...tasks, data]);
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === taskToBeEdited.id) {
+          return { ...data.updatedTask };
+        }
+
+        return { ...task };
+      });
+
+      setTasks(updatedTasks);
       setShowDialog(false);
 
       reset();
@@ -81,9 +93,8 @@ export default function CreateTaskForm({
           id="title"
           type="text"
           placeholder="Digite o título da tarefa"
-          {...register("title", { required: true })}
+          {...register("title")}
         />
-        {errors.title && <Span>O título é obrigatório.</Span>}
       </Label>
 
       <Label className={inter.className} htmlFor="description">
@@ -92,9 +103,8 @@ export default function CreateTaskForm({
           id="description"
           rows={3}
           placeholder="Digite seu email"
-          {...register("description", { required: true })}
+          {...register("description")}
         />
-        {errors.description && <Span>A descrição é obrigatória.</Span>}
       </Label>
 
       <Label className={inter.className} htmlFor="completion_data">
@@ -102,23 +112,17 @@ export default function CreateTaskForm({
         <Input
           id="completion_data"
           type="date"
-          {...register("completion_data", { required: true })}
+          {...register("completion_data")}
         />
-        {errors.completion_data && (
-          <Span>O data esperada para conslusão é obrigatória.</Span>
-        )}
       </Label>
 
       <Label className={inter.className} htmlFor="priority">
         Data esperada para conclusão
-        <Select id="priority" {...register("priority", { required: true })}>
-          <option>Alta</option>
-          <option>Média</option>
-          <option>Baixa</option>
+        <Select id="priority" {...register("priority")}>
+          <option value="alta">Alta</option>
+          <option value="média">Média</option>
+          <option value="baixa">Baixa</option>
         </Select>
-        {errors.priority && (
-          <Span>O data esperada para conslusão é obrigatória.</Span>
-        )}
       </Label>
 
       {errorMessage ? <Span>{errorMessage}</Span> : null}

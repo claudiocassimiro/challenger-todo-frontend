@@ -23,6 +23,7 @@ import axios from "axios";
 import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import CreateTaskDialog from "@/components/dialogs/CreateTaskDialog";
+import UpdateTaskDialog from "@/components/dialogs/UpdateTaskDialog";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -73,14 +74,14 @@ export default function Tasks() {
           {tasks.length > 0 ? (
             tasks.map((task) => {
               return (
-                <ContainerTask key={task.id}>
+                <ContainerTask key={task?.id}>
                   <ContainerCompleteCheckBoxAndTaskInfo>
                     <CheckBox type="checkbox" />
                     <div>
-                      <H2 className={inter.className}>{task.title}</H2>
-                      {task.completion_data ? (
+                      <H2 className={inter.className}>{task?.title}</H2>
+                      {task?.completion_data ? (
                         <TaskP className={inter.className}>
-                          {`${new Date(task.completion_data).toLocaleString(
+                          {`${new Date(task?.completion_data).toLocaleString(
                             "pt-BR",
                             { timeZone: "America/Sao_Paulo" }
                           )}`.replace("GMT-0300 (Brasilia Standard Time)", "")}
@@ -88,6 +89,11 @@ export default function Tasks() {
                       ) : null}
                     </div>
                   </ContainerCompleteCheckBoxAndTaskInfo>
+                  <UpdateTaskDialog
+                    setTasks={setTasks}
+                    tasks={tasks}
+                    taskToBeEdited={task}
+                  />
                 </ContainerTask>
               );
             })
