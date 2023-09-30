@@ -34,16 +34,18 @@ export const Section = styled.section`
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 80%;
   gap: 1rem;
   margin: 0 auto;
   max-height: 50%;
   overflow: auto;
   @media (min-width: 768px) {
+    align-items: center;
     width: 50%;
-    max-height: 80%;
+    max-height: 60%;
+  }
+  &::-webkit-scrollbar {
+    width: 0;
   }
 `;
 
