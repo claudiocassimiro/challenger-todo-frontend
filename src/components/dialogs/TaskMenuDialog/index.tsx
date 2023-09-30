@@ -1,10 +1,11 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { CiMenuKebab } from "react-icons/ci";
+import { HiDotsHorizontal } from "react-icons/hi";
 import styles from "./styles.module.css";
 import UpdateTaskDialog from "../UpdateTaskDialog";
 import { Dispatch, SetStateAction } from "react";
 import { Task } from "@/app/tasks/page";
 import DeleteTaskDialog from "../DeleteTaskDialog";
+import TaskDetailsDialog from "../TaskDetailsDialog";
 
 interface TaskMenuDialogProps {
   setTasks: Dispatch<SetStateAction<Task[]>>;
@@ -23,7 +24,7 @@ const TaskMenuDialog = ({
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button className={styles.iconButton} aria-label="Customise options">
-          <CiMenuKebab />
+          <HiDotsHorizontal size={20} fill="#fff" />
         </button>
       </DropdownMenu.Trigger>
 
@@ -32,6 +33,8 @@ const TaskMenuDialog = ({
           className={styles.dropdownMenuContent}
           sideOffset={5}
         >
+          <TaskDetailsDialog task={taskToBeEdited} />
+
           <UpdateTaskDialog
             setTasks={setTasks}
             tasks={tasks}
