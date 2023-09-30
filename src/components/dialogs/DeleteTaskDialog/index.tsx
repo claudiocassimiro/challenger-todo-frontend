@@ -60,7 +60,14 @@ export default function DeleteTaskDialog({
         className={styles.deleteTaskDialogTrigger}
         aria-label="Excluir Task"
       >
-        <FaRegTrashAlt size={20} />
+        <div className={styles.containerOpenDialogButton}>
+          Deletar tarefa
+          <FaRegTrashAlt
+            size={20}
+            style={{ cursor: "pointer" }}
+            fill="#7E57C2"
+          />
+        </div>
       </Trigger>
       <Portal>
         <Overlay className={styles.deleteTaskDialogOverlay} />
