@@ -7,18 +7,20 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Visite o repositório do projeto em&nbsp;
-          <a
-            className={styles.code}
-            href="https://github.com/claudiocassimiro/challenger-todo-frontend"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            github.com/claudiocassimiro
-          </a>
-        </p>
+      <div className={styles.containerDescriptionAndSignInButtons}>
+        <div className={styles.description}>
+          <p className={inter.className}>
+            Visite o repositório do projeto em&nbsp;
+            <a
+              className={styles.code}
+              href="https://github.com/claudiocassimiro/challenger-todo-frontend"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              github.com/claudiocassimiro
+            </a>
+          </p>
+        </div>
         <div className={styles.containerButtons}>
           <Link href="/login" className={styles.button}>
             Login
