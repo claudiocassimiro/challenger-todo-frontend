@@ -8,7 +8,7 @@ export const Main = styled.main`
 
 export const Header = styled.header`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   padding: 1rem 0 0 0;
@@ -17,6 +17,7 @@ export const Header = styled.header`
 export const H1 = styled.h1`
   color: #fff;
   text-align: center;
+  align-self: center;
   @media (min-width: 768px) {
     font-size: 2.4rem;
   }
