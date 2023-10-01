@@ -24,6 +24,7 @@ import useAuth from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import CreateTaskDialog from "@/components/dialogs/CreateTaskDialog";
 import TaskMenuDialog from "@/components/dialogs/TaskMenuDialog";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -96,10 +97,29 @@ export default function Tasks() {
     } catch {}
   };
 
+  const logout = () => {
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
+  };
+
+  const formatDate = (date: string) => {
+    return new Date(date).toLocaleDateString("pt-BR", {
+      timeZone: "UTC",
+    });
+  };
+
   return (
     <Main>
       <Header>
         <H1 className={inter.className}>Tarefas</H1>
+        <Link
+          className={inter.className}
+          href="/"
+          title="logout"
+          onClick={logout}
+        >
+          Logout
+        </Link>
       </Header>
       <Section>
         <Div>
@@ -117,9 +137,7 @@ export default function Tasks() {
                       <H2 className={inter.className}>{task?.title}</H2>
                       {task?.completion_data ? (
                         <TaskP className={inter.className}>
-                          {`${new Date(
-                            task?.completion_data
-                          ).toLocaleDateString("pt-BR")}`}
+                          {formatDate(task.completion_data)}
                         </TaskP>
                       ) : null}
                     </div>
