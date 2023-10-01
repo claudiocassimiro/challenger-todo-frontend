@@ -91,7 +91,7 @@ export default function CreateTaskForm({
         <TextArea
           id="description"
           rows={3}
-          placeholder="Digite seu email"
+          placeholder="Escreva uma descrição para sua tarefa"
           {...register("description", { required: true })}
         />
         {errors.description && <Span>A descrição é obrigatória.</Span>}
@@ -105,19 +105,19 @@ export default function CreateTaskForm({
           {...register("completion_data", { required: true })}
         />
         {errors.completion_data && (
-          <Span>O data esperada para conslusão é obrigatória.</Span>
+          <Span>A data esperada para conslusão é obrigatória.</Span>
         )}
       </Label>
 
       <Label className={inter.className} htmlFor="priority">
-        Data esperada para conclusão
+        Selecione o nível de prioridade
         <Select id="priority" {...register("priority", { required: true })}>
           <option>Alta</option>
           <option>Média</option>
           <option>Baixa</option>
         </Select>
         {errors.priority && (
-          <Span>O data esperada para conslusão é obrigatória.</Span>
+          <Span>O nível de prioridade da task é obrigatório.</Span>
         )}
       </Label>
 

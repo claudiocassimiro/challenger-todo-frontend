@@ -67,7 +67,7 @@ export default function Register() {
           <Input
             id="password"
             type="password"
-            placeholder="Digite seu email"
+            placeholder="Digite sua senha"
             {...register("password", { required: true })}
           />
           {errors.password && <Span>A senha é obrigatória.</Span>}

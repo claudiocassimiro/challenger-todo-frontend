@@ -98,7 +98,7 @@ export default function UpdateTaskForm({
       </Label>
 
       <Label className={inter.className} htmlFor="description">
-        Descrição da tarefa
+        Escreva uma descrição para sua tarefa
         <TextArea
           id="description"
           rows={3}
@@ -117,7 +117,7 @@ export default function UpdateTaskForm({
       </Label>
 
       <Label className={inter.className} htmlFor="priority">
-        Data esperada para conclusão
+        Selecione o nível de prioridade
         <Select id="priority" {...register("priority")}>
           <option value="alta">Alta</option>
           <option value="média">Média</option>
