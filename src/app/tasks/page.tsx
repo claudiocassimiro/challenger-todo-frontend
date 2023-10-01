@@ -43,10 +43,6 @@ export default function Tasks() {
   const { isAuthenticated, token } = useAuth();
   const { push } = useRouter();
 
-  if (!isAuthenticated) {
-    push("/login");
-  }
-
   useEffect(() => {
     try {
       const getTasks = async () => {
@@ -65,6 +61,13 @@ export default function Tasks() {
     } catch {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      push("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const updateTaskStatus = async (
     e: ChangeEvent<HTMLInputElement>,
